@@ -1,1 +1,1 @@
-listen "/tmp/simple-ajax-proxy", :backlog => 64
+listen "/tmp/simple-ajax-proxy.sock", :backlog => 64
