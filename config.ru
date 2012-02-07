@@ -4,16 +4,14 @@ require 'net/http'
 
 class SimpleAjaxProxy < Sinatra::Base
   post '/' do
-  url = URI.parse(params[:url])
+    url = URI.parse(params[:url])
 
-  req = Net::HTTP::Post.new(url.path, initheader = {'Content-Type' =>'application/json'})
-  req.body = params[:request]
+    req = Net::HTTP::Post.new(url.path, initheader = {'Content-Type' =>'application/json'})
+    req.body = params[:request]
 
-  response = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
-  puts "Response #{response.code} #{response.message}: #{response.body}"
-
-  response['Access-Control-Allow-Origin'] = url
-  response.body
+    response = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
+    response['Access-Control-Allow-Origin'] = url
+    response.body
   end
 
   run! if app_file == $0
